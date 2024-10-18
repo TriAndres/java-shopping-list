@@ -1,20 +1,24 @@
 package ru.practicum.shoping.console;
 
-import ru.practicum.shoping.repository.ShoppingRepository;
-import ru.practicum.shoping.service.ShoppingService;
+import ru.practicum.shoping.file.ShoppingFile;
+import ru.practicum.shoping.repository.ShoppingRepositoryImpl;
+import ru.practicum.shoping.service.ShoppingServiceImpl;
 
 import java.util.Scanner;
 
 public class ShoppingConsole {
     private final Scanner sc = new Scanner(System.in);
-    private ShoppingService ss;
-    private  ShoppingRepository sr;
+    private ShoppingServiceImpl ss;
+    private ShoppingRepositoryImpl sr;
+    private ShoppingFile sf;
 
     public ShoppingConsole() {
-        sr = new ShoppingRepository();
-        ss = new ShoppingService(sc, sr);
+        sr = new ShoppingRepositoryImpl();
+        sf = new ShoppingFile();
+        ss = new ShoppingServiceImpl(sc, sr, sf);
     }
     public void game() {
+        ss.createAll();
         System.out.println("Вас приветствует список покупок!");
         while (true) {
             String line = menu();
