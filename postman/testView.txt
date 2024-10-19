@@ -1,7 +1,6 @@
 // запись
 POST
 http://localhost:8080/shopping/create
-
 {
     "id":1,
     "name":"yabloko"
