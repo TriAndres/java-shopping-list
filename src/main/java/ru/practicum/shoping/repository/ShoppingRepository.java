@@ -1,13 +1,9 @@
 package ru.practicum.shoping.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import ru.practicum.shoping.model.Shopping;
 
-import java.util.Collection;
-
-public interface ShoppingRepository {
-    Collection<Shopping> findAll();
-
-    Shopping create(Shopping shopping);
-
-    void clear() ;
+@Repository
+public interface ShoppingRepository extends JpaRepository<Shopping, Long> {
 }

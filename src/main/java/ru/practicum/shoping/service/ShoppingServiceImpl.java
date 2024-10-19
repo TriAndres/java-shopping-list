@@ -21,11 +21,11 @@ public class ShoppingServiceImpl implements ShoppingService {
 
     @Override
     public Shopping create(Shopping shopping) {
-        return repository.create(shopping);
+        return repository.save(shopping);
     }
 
     @Override
     public void clear() {
-        repository.clear();
+        repository.deleteAll();
     }
 }
