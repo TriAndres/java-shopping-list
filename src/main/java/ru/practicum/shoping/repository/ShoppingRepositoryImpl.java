@@ -1,11 +1,12 @@
 package ru.practicum.shoping.repository;
 
+import org.springframework.stereotype.Repository;
 import ru.practicum.shoping.model.Shopping;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
+@Repository
 public class ShoppingRepositoryImpl implements ShoppingRepository {
     private final Map<Long, Shopping> shoppings = new HashMap<>();
 
@@ -15,14 +16,15 @@ public class ShoppingRepositoryImpl implements ShoppingRepository {
     }
 
     @Override
-    public void create(Shopping shopping) {
+    public Shopping create(Shopping shopping) {
         shopping.setId(getNextId());
         shoppings.put(shopping.getId() + 1, shopping);
+        return shopping;
     }
 
     @Override
     public void clear() {
-        shoppings.clear();
+         shoppings.clear();
     }
 
     private Long getNextId() {
@@ -30,6 +32,6 @@ public class ShoppingRepositoryImpl implements ShoppingRepository {
                 .stream()
                 .mapToLong(id -> id)
                 .max()
-                .orElse(1L);
+                .orElse(1);
     }
 }

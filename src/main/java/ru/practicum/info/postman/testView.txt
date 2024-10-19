@@ -1,0 +1,27 @@
+// запись
+POST
+http://localhost:8080/shopping/create
+
+{
+    "id":1,
+    "name":"yabloko"
+}
+
+{
+    "id":2,
+    "name":"vishnya"
+}
+
+-----------------------------
+// показать список
+GET
+http://localhost:8080/shopping/list
+
+-----------------------------
+// очистить список
+GET
+http://localhost:8080/shopping/clear
+-----------------------------
+
+Загрузка файла и JSON-данных в Postman
+https://www.baeldung.com/postman-upload-file-json

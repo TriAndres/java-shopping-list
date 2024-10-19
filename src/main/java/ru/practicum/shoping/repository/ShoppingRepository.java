@@ -7,7 +7,7 @@ import java.util.Collection;
 public interface ShoppingRepository {
     Collection<Shopping> findAll();
 
-    void create(Shopping shopping);
+    Shopping create(Shopping shopping);
 
-    void clear();
+    void clear() ;
 }

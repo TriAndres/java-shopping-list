@@ -1,11 +1,14 @@
 package ru.practicum.shoping.service;
 
+import org.springframework.stereotype.Service;
+import ru.practicum.shoping.model.Shopping;
+
+import java.util.Collection;
+
 public interface ShoppingService {
-    void create();
+    Collection<Shopping> findAll();
 
-    void createAll();
-
-    void findAll();
+    Shopping create(Shopping shopping);
 
     void clear();
 }

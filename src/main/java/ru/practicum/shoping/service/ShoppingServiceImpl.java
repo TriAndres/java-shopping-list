@@ -1,53 +1,31 @@
 package ru.practicum.shoping.service;
 
-import ru.practicum.shoping.file.ShoppingFile;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Repository;
 import ru.practicum.shoping.model.Shopping;
-import ru.practicum.shoping.repository.ShoppingRepositoryImpl;
+import ru.practicum.shoping.repository.ShoppingRepository;
 
-import java.util.Scanner;
+import java.util.Collection;
 
+@Slf4j
+@AllArgsConstructor
+@Repository
 public class ShoppingServiceImpl implements ShoppingService {
-    private final Scanner sc;
-    private final ShoppingRepositoryImpl sr;
-    private final ShoppingFile sf;
+    private final ShoppingRepository repository;
 
-    public ShoppingServiceImpl(Scanner sc, ShoppingRepositoryImpl sr, ShoppingFile sf) {
-        this.sc = sc;
-        this.sr = sr;
-        this.sf = sf;
+    @Override
+    public Collection<Shopping> findAll() {
+        return repository.findAll();
     }
 
     @Override
-    public void create() {
-        System.out.println("Введите добавляемый товар");
-        sr.create(new Shopping(sc.next()));
-        sf.setFile(sr.findAll());
-        System.out.println("Добавили товар в список.");
-    }
-
-    @Override
-    public void createAll() {
-        for (Shopping shopping : sf.getFile()) {
-            sr.create(shopping);
-        }
-        System.out.println("Записали товары в список.");
-    }
-
-    @Override
-    public void findAll() {
-        if (!sr.findAll().isEmpty()) {
-            for (Shopping shopping : sr.findAll()) {
-                System.out.println(shopping.toString());
-            }
-            System.out.println("Вывели список.");
-        } else {
-            System.out.println("Заполнете список.");
-        }
+    public Shopping create(Shopping shopping) {
+        return repository.create(shopping);
     }
 
     @Override
     public void clear() {
-        sr.clear();
-        System.out.println("Очищен список");
+        repository.clear();
     }
 }
