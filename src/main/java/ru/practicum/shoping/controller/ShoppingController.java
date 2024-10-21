@@ -28,7 +28,7 @@ public class ShoppingController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/clear")
+    @DeleteMapping("/clear")
     public void clear() {
         service.clear();
     }

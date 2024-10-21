@@ -18,7 +18,7 @@ http://localhost:8080/shopping/list
 
 -----------------------------
 // очистить список
-GET
+DELETE
 http://localhost:8080/shopping/clear
 -----------------------------
 
