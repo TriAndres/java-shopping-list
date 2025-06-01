@@ -6,8 +6,7 @@ public abstract class Menu {
        while (true) {
            String line = menu();
            select(line);
-           if (line.equals("0")) {
-               out();
+           if (line.equals("4")) {
                break;
            }
        }

@@ -27,12 +27,27 @@ public class ShoppingServiceImpl implements ShoppingService {
     }
 
     @Override
-    public void save() {
+    public void create() {
         String name = scanner.next();
         Shopping shopping = new Shopping(null,name);
         shopping.setId(getNextId());
         shoppingFile.save(shopping);
         System.out.println("Добавлен: " + shopping.toString());
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void findById() {
+
+    }
+
+    @Override
+    public void deleteById() {
+
     }
 
     @Override
