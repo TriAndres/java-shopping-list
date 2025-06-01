@@ -1,67 +1,49 @@
 package ru.practicum.service;
 
-import ru.practicum.file.ShoppingFile;
 import ru.practicum.model.Shopping;
 
-import java.util.Scanner;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 public class ShoppingServiceImpl implements ShoppingService {
-    private final ShoppingFile shoppingFile;
-    private Scanner scanner;
-
-    public ShoppingServiceImpl(ShoppingFile shoppingFile) {
-        this.shoppingFile = shoppingFile;
-        scanner = new Scanner(System.in);
+    @Override
+    public Collection<Shopping> findAll() {
+        return List.of();
     }
 
     @Override
-    public void findAll() {
-        if (!shoppingFile.shoppingMap.isEmpty()) {
-            for (Shopping shopping : shoppingFile.findAll()) {
-                System.out.println(shopping.toString());
-            }
-            System.out.println("Вывод списка.");
-        } else {
-            System.out.println("Заполните список.");
-        }
+    public Shopping create() {
+        return null;
     }
 
     @Override
-    public void create() {
-        String name = scanner.next();
-        Shopping shopping = new Shopping(null,name);
-        shopping.setId(getNextId());
-        shoppingFile.save(shopping);
-        System.out.println("Добавлен: " + shopping.toString());
+    public Shopping update() {
+        return null;
     }
 
     @Override
-    public void update() {
-
+    public Optional<Shopping> findById(long id) {
+        return Optional.empty();
     }
 
     @Override
-    public void findById() {
-
-    }
-
-    @Override
-    public void deleteById() {
+    public void deleteById(long id) {
 
     }
 
     @Override
     public void deleteAll() {
-        System.out.println("Очищен список.");
-        shoppingFile.deleteAll();
+
     }
 
-    private long getNextId() {
-        long currentMaxId = shoppingFile.findAll()
-                .stream()
-                .mapToLong(Shopping::getId)
-                .max()
-                .orElse(0);
-              return ++currentMaxId;
-    }
+
+//    private long getNextId() {
+//        long currentMaxId = shoppingFile.findAll()
+//                .stream()
+//                .mapToLong(Shopping::getId)
+//                .max()
+//                .orElse(0);
+//              return ++currentMaxId;
+//    }
 }

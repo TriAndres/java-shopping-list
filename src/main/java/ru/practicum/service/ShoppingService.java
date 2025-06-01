@@ -1,15 +1,20 @@
 package ru.practicum.service;
 
+import ru.practicum.model.Shopping;
+
+import java.util.Collection;
+import java.util.Optional;
+
 public interface ShoppingService {
-    void findAll();
+    Collection<Shopping> findAll();
 
-    void create();
+    Shopping create();
 
-    void update();
+    Shopping update();
 
-    void findById();
+    Optional<Shopping> findById(long id);
 
-    void deleteById();
+    void deleteById(long id);
 
     void deleteAll();
 }
