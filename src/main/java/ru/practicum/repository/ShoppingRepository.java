@@ -10,7 +10,7 @@ public interface ShoppingRepository {
 
     Shopping save(Shopping shopping);
 
-    Optional<Shopping> findById(long id);
+    Shopping findById(long id);
 
     void deleteById(long id);
 
