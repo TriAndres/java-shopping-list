@@ -10,9 +10,12 @@ public class ShoppingMenu extends Menu {
     String menu() {
         System.out.println("\n\tВыберите одну из команд:" +
                 "\n\t1. Добавить товар в список" +
-                "\n\t2. Показать список" +
-                "\n\t3. Очистить список" +
-                "\n\t4. Завершить работу");
+                "\n\t2. Обновить по id товар в список" +
+                "\n\t3. Показать по id" +
+                "\n\t4. Показать список" +
+                "\n\t5. Удалить по id из списка" +
+                "\n\t6. Очистить список" +
+                "\n\t7. Завершить работу");
         return new Scanner(System.in).next();
     }
 
@@ -23,12 +26,21 @@ public class ShoppingMenu extends Menu {
                 shoppingServiceImpl().create();
                 break;
             case ACTION2:
-                shoppingServiceImpl().findAll();
+                shoppingServiceImpl().update();
                 break;
             case ACTION3:
-                shoppingServiceImpl().deleteAll();
+                shoppingServiceImpl().findById();
                 break;
             case ACTION4:
+                shoppingServiceImpl().findAll();
+                break;
+            case ACTION5:
+                shoppingServiceImpl().deleteById();
+                break;
+            case ACTION6:
+                shoppingServiceImpl().deleteAll();
+                break;
+            case ACTION7:
                 out();
                 break;
             case null:

@@ -29,7 +29,7 @@ public class ShoppingServiceImpl implements ShoppingService {
     @Override
     public void create() {
         String name = scanner.next();
-        Shopping shopping = new Shopping(null,name);
+        Shopping shopping = new Shopping(null, name);
         shopping.setId(getNextId());
         shoppingFile.save(shopping);
         System.out.println("Добавлен: " + shopping.toString());
@@ -37,17 +37,41 @@ public class ShoppingServiceImpl implements ShoppingService {
 
     @Override
     public void update() {
-
+        System.out.println("Введите id для вывода элемента из списка.");
+        long id = Long.parseLong(scanner.next());
+        if (shoppingFile.findAll().contains(shoppingFile.findById(id))) {
+            Shopping shopping = shoppingFile.findById(id);
+            System.out.println("Введите новое название элемента:");
+            shopping.setName(scanner.next());
+            shoppingFile.save(shopping);
+            System.out.println("Обнавлён элемент по id = " + id);
+        } else {
+            System.out.println("В списке нет элемента по id = " + id);
+        }
     }
 
     @Override
     public void findById() {
-
+        System.out.println("Введите id для вывода элемента из списка.");
+        long id = Long.parseLong(scanner.next());
+        if (shoppingFile.findAll().contains(shoppingFile.findById(id))) {
+            System.out.println(shoppingFile.findById(id).toString());
+            System.out.println("Вывод элемента из списка по id = " + id);
+        } else {
+            System.out.println("В списке нет элемента по id = " + id);
+        }
     }
 
     @Override
     public void deleteById() {
-
+        System.out.println("Введите id удаляемого элемента из списка.");
+        long id = Long.parseLong(scanner.next());
+        if (shoppingFile.findAll().contains(shoppingFile.findById(id))) {
+            shoppingFile.deleteById(id);
+            System.out.println("Удалён элемент из списка по id = " + id);
+        } else {
+            System.out.println("В списке нет элемента по id = " + id);
+        }
     }
 
     @Override
@@ -62,6 +86,6 @@ public class ShoppingServiceImpl implements ShoppingService {
                 .mapToLong(Shopping::getId)
                 .max()
                 .orElse(0);
-              return ++currentMaxId;
+        return ++currentMaxId;
     }
 }

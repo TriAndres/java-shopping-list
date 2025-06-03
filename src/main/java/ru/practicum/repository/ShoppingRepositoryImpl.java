@@ -21,8 +21,8 @@ public class ShoppingRepositoryImpl implements ShoppingRepository {
     }
 
     @Override
-    public Optional<Shopping> findById(long id) {
-        return Optional.ofNullable(shoppingMap.get(id));
+    public Shopping findById(long id) {
+        return shoppingMap.get(id);
     }
 
     @Override
