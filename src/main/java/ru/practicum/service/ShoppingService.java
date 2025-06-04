@@ -1,7 +1,6 @@
 package ru.practicum.service;
 
 import ru.practicum.dto.ShoppingDTO;
-import ru.practicum.model.Shopping;
 
 import java.util.Collection;
 import java.util.Optional;
