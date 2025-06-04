@@ -1,29 +1,45 @@
 package ru.practicum.service;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import ru.practicum.dto.ShoppingDTO;
 import ru.practicum.model.Shopping;
+import ru.practicum.repository.ShoppingRepository;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+import static ru.practicum.mapper.ShoppingMapper.toListDTO;
+import static ru.practicum.mapper.ShoppingMapper.toModel;
+
+@Service
+@RequiredArgsConstructor
+@Slf4j
 public class ShoppingServiceImpl implements ShoppingService {
+    private final ShoppingRepository repository;
     @Override
-    public Collection<Shopping> findAll() {
-        return List.of();
+    public Collection<ShoppingDTO> findAll() {
+        return new ArrayList<>(toListDTO(repository.findAll()));
     }
 
     @Override
-    public Shopping create() {
+    public ShoppingDTO create(ShoppingDTO shoppingDTO) {
+        shoppingDTO.setId(getNextId());
+        repository.save(toModel(shoppingDTO));
+        log.info("Добавлен в список : " + shoppingDTO.toString());
+        return shoppingDTO;
+    }
+
+    @Override
+    public ShoppingDTO update(ShoppingDTO shoppingDTO) {
         return null;
     }
 
     @Override
-    public Shopping update() {
-        return null;
-    }
-
-    @Override
-    public Optional<Shopping> findById(long id) {
+    public Optional<ShoppingDTO> findById(long id) {
         return Optional.empty();
     }
 
@@ -36,14 +52,12 @@ public class ShoppingServiceImpl implements ShoppingService {
     public void deleteAll() {
 
     }
-
-
-//    private long getNextId() {
-//        long currentMaxId = shoppingFile.findAll()
-//                .stream()
-//                .mapToLong(Shopping::getId)
-//                .max()
-//                .orElse(0);
-//              return ++currentMaxId;
-//    }
+        private long getNextId() {
+        long currentMaxId = repository.findAll()
+                .stream()
+                .mapToLong(Shopping::getId)
+                .max()
+                .orElse(0);
+              return ++currentMaxId;
+    }
 }

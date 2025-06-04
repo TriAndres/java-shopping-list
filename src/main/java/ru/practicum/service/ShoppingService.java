@@ -1,18 +1,19 @@
 package ru.practicum.service;
 
+import ru.practicum.dto.ShoppingDTO;
 import ru.practicum.model.Shopping;
 
 import java.util.Collection;
 import java.util.Optional;
 
 public interface ShoppingService {
-    Collection<Shopping> findAll();
+    Collection<ShoppingDTO> findAll();
 
-    Shopping create();
+    ShoppingDTO create(ShoppingDTO shoppingDTO);
 
-    Shopping update();
+    ShoppingDTO update(ShoppingDTO shoppingDTO);
 
-    Optional<Shopping> findById(long id);
+    Optional<ShoppingDTO> findById(long id);
 
     void deleteById(long id);
 
