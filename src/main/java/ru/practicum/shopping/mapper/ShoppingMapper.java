@@ -1,7 +1,7 @@
-package ru.practicum.mapper;
+package ru.practicum.shopping.mapper;
 
-import ru.practicum.dto.ShoppingDTO;
-import ru.practicum.model.Shopping;
+import ru.practicum.shopping.dto.ShoppingDTO;
+import ru.practicum.shopping.model.Shopping;
 
 import java.util.ArrayList;
 import java.util.List;

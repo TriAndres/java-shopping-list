@@ -1,18 +1,18 @@
-package ru.practicum.service;
+package ru.practicum.shopping.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.practicum.dto.ShoppingDTO;
-import ru.practicum.model.Shopping;
-import ru.practicum.repository.ShoppingRepository;
+import ru.practicum.shopping.dto.ShoppingDTO;
+import ru.practicum.shopping.model.Shopping;
+import ru.practicum.shopping.repository.ShoppingRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
-import static ru.practicum.mapper.ShoppingMapper.toListDTO;
-import static ru.practicum.mapper.ShoppingMapper.toModel;
+import static ru.practicum.shopping.mapper.ShoppingMapper.toListDTO;
+import static ru.practicum.shopping.mapper.ShoppingMapper.toModel;
 
 @Service
 @RequiredArgsConstructor
