@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.shopping.dto.ShoppingDTO;
+import ru.practicum.shopping.exception.DoesNotExistException;
 import ru.practicum.shopping.model.Shopping;
 import ru.practicum.shopping.repository.ShoppingRepository;
 
@@ -11,8 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
-import static ru.practicum.shopping.mapper.ShoppingMapper.toListDTO;
-import static ru.practicum.shopping.mapper.ShoppingMapper.toModel;
+import static ru.practicum.shopping.mapper.ShoppingMapper.*;
 
 @Service
 @RequiredArgsConstructor
@@ -34,23 +34,42 @@ public class ShoppingServiceImpl implements ShoppingService {
     }
 
     @Override
-    public ShoppingDTO update(ShoppingDTO shoppingDTO) {
-        return null;
+    public ShoppingDTO update(ShoppingDTO newShoppingDTO) {
+        if (repository.findById(newShoppingDTO.getId()).orElseThrow().getId().equals(newShoppingDTO.getId())) {
+            Shopping old = repository.findById(newShoppingDTO.getId()).orElseThrow();
+            old.setName(newShoppingDTO.getName());
+            repository.save(old);
+            log.info("Обнавлён элемент по id = {}", old.getId());
+            return toDTO(old);
+        }
+        log.info("Ошибка при обновлении.");
+        throw new DoesNotExistException("Элемент отсутствует в списке.");
     }
 
     @Override
     public Optional<ShoppingDTO> findById(long id) {
-        return Optional.empty();
+        if (repository.findAll().contains(repository.findById(id).orElseThrow())) {
+            log.info("Вывод элемента из списка по id = " + id);
+            return Optional.ofNullable(toDTO(repository.findById(id).orElseThrow()));
+        }
+        log.info("В списке нет элемента по id = {}", id);
+        throw new DoesNotExistException("Элемент отсутствует в списке.");
     }
 
     @Override
     public void deleteById(long id) {
-
+        if (repository.findAll().contains(repository.findById(id).orElseThrow())) {
+            log.info("Элемент удалён из списка по id = {}", id);
+            repository.deleteById(id);
+        }
+        log.info("В списке нет элемента по id = " + id);
+        throw new DoesNotExistException("Элемент отсутствует в списке.");
     }
 
     @Override
     public void deleteAll() {
-
+        log.info("Очищен список.");
+        repository.deleteAll();
     }
 
     private long getNextId() {

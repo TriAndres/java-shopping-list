@@ -10,7 +10,7 @@ public interface ShoppingService {
 
     ShoppingDTO create(ShoppingDTO shoppingDTO);
 
-    ShoppingDTO update(ShoppingDTO shoppingDTO);
+    ShoppingDTO update(ShoppingDTO newShoppingDTO);
 
     Optional<ShoppingDTO> findById(long id);
 
