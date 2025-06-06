@@ -2,27 +2,55 @@ package ru.practicum.shopping.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import ru.practicum.shopping.dto.ShoppingDTO;
 import ru.practicum.shopping.service.ShoppingServiceImpl;
+
+import java.util.Collection;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(name = "/shopping")
-@Slf4j
 @RequiredArgsConstructor
+@Slf4j
 public class ShoppingController {
     private final ShoppingServiceImpl shoppingService;
-    /*
-    Collection<ShoppingDTO> findAll();
 
-    ShoppingDTO create(ShoppingDTO shoppingDTO);
+    @GetMapping
+    public Collection<ShoppingDTO> findAll() {
+        log.info("findAll()");
+        return shoppingService.findAll();
+    }
 
-    ShoppingDTO update(ShoppingDTO newShoppingDTO);
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ShoppingDTO create(@RequestBody ShoppingDTO shoppingDTO) {
+        log.info("create(@RequestBody ShoppingDTO shoppingDTO)");
+        return shoppingService.create(shoppingDTO);
+    }
 
-    Optional<ShoppingDTO> findById(long id);
+    @PutMapping
+    public ShoppingDTO update(@RequestBody ShoppingDTO newShoppingDTO) {
+        log.info("update(@RequestBody ShoppingDTO newShoppingDTO)");
+        return shoppingService.update(newShoppingDTO);
+    }
 
-    void deleteById(long id);
+    @GetMapping("/{shoppingId}")
+    public Optional<ShoppingDTO> findById(@PathVariable long shoppingId) {
+        log.info("findById(@PathVariable long shoppingId)");
+        return shoppingService.findById(shoppingId);
+    }
 
-    void deleteAll();
-     */
+    @DeleteMapping("/{shoppingId}")
+    public void deleteById(@PathVariable long shoppingId) {
+        log.info("deleteById(@PathVariable long shoppingId)");
+        shoppingService.deleteById(shoppingId);
+    }
+
+    @DeleteMapping
+    public void deleteAll() {
+        log.info("deleteAll()");
+        shoppingService.deleteAll();
+    }
 }
