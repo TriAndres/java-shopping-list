@@ -1,21 +1,22 @@
 package ru.practicum.shopping.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shopping.dto.ShoppingDTO;
-import ru.practicum.shopping.service.ShoppingServiceImpl;
+import ru.practicum.shopping.service.ShoppingService;
 
 import java.util.Collection;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(name = "/shopping")
+@RequestMapping("/api/shopping")
 @RequiredArgsConstructor
 @Slf4j
 public class ShoppingController {
-    private final ShoppingServiceImpl shoppingService;
+    private final ShoppingService shoppingService;
 
     @GetMapping
     public Collection<ShoppingDTO> findAll() {
@@ -25,7 +26,7 @@ public class ShoppingController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ShoppingDTO create(@RequestBody ShoppingDTO shoppingDTO) {
+    public ShoppingDTO create(@Valid @RequestBody ShoppingDTO shoppingDTO) {
         log.info("create(@RequestBody ShoppingDTO shoppingDTO)");
         return shoppingService.create(shoppingDTO);
     }
