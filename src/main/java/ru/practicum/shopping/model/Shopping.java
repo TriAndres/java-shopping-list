@@ -1,12 +1,16 @@
 package ru.practicum.shopping.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import ru.practicum.shopping.validator.NonNull;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "shopping")
 public class Shopping {
@@ -14,7 +18,7 @@ public class Shopping {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @NotNull
+    @NonNull
     @Column(name = "name")
     private String name;
 }

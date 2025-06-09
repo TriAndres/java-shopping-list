@@ -27,9 +27,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 
     @Override
     public ShoppingDTO create(ShoppingDTO shoppingDTO) {
-        shoppingDTO.setId(getNextId());
         repository.save(toModel(shoppingDTO));
-        log.info("Добавлен в список : " + shoppingDTO.toString());
+        log.info("Добавлен в список : {}", shoppingDTO);
         return shoppingDTO;
     }
 
@@ -48,12 +47,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 
     @Override
     public Optional<ShoppingDTO> findById(long id) {
-        if (repository.findAll().contains(repository.findById(id).orElseThrow())) {
-            log.info("Вывод элемента из списка по id = " + id);
-            return Optional.ofNullable(toDTO(repository.findById(id).orElseThrow()));
-        }
-        log.info("В списке нет элемента по id = {}", id);
-        throw new DoesNotExistException("Элемент отсутствует в списке.");
+        log.info("Вывод элемента из списка по id = {}", id);
+        return Optional.ofNullable(toDTO(repository.findById(id).orElseThrow()));
     }
 
     @Override
@@ -62,22 +57,11 @@ public class ShoppingServiceImpl implements ShoppingService {
             log.info("Элемент удалён из списка по id = {}", id);
             repository.deleteById(id);
         }
-        log.info("В списке нет элемента по id = " + id);
-        throw new DoesNotExistException("Элемент отсутствует в списке.");
     }
 
     @Override
     public void deleteAll() {
         log.info("Очищен список.");
         repository.deleteAll();
-    }
-
-    private long getNextId() {
-        long currentMaxId = repository.findAll()
-                .stream()
-                .mapToLong(Shopping::getId)
-                .max()
-                .orElse(0);
-        return ++currentMaxId;
     }
 }
